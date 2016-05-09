@@ -1,0 +1,6 @@
+name = "Leaflet GeoJSON"
+description = "API Extension for using Leaflet with GeoJSON data sources."
+
+core = 7.x
+
+dependencies[] = leaflet

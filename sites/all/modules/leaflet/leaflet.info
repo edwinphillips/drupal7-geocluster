@@ -1,0 +1,12 @@
+name = Leaflet
+description = Integration with the Leaflet map scripting library.
+core = 7.x
+
+dependencies[] = libraries
+
+files[] = leaflet.formatters.inc
+
+; Information added by drush on 2014-01-23
+version = "7.x-1.1+1-dev"
+project = "leaflet"
+datestamp = "1390503811"
