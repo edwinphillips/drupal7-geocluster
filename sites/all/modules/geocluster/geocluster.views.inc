@@ -27,7 +27,7 @@ function geocluster_views_plugins() {
  * Implements hook_views_data_alter().
  */
 function geocluster_views_data_alter(&$data) {
-  $fields = field_info_fields();
+  $fields = field_info_fields();  
   foreach ($fields as $field) {
     if ($field['type'] == 'geofield') {
       $table_name = 'field_data_' . $field['field_name'];

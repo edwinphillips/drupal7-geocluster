@@ -50,13 +50,13 @@
 
     clickOnClustered: function(e, featureData, layer) {
         var map = layer._map;
-
         // Close any other opened popup.
         if (map._popup) {
           map._popup._source.closePopup();
         }
-
-        map.setView(layer.getLatLng(), map._zoom + 1);
+        // Zoom and pan to clicked item.
+        map.panTo(layer.getLatLng());
+        map.zoomIn();
     }
 
   };

@@ -4,13 +4,14 @@
  * Implements hook_views_data_alter().
  */
 function geocluster_solr_views_data_alter(&$data) {
-  $fields = field_info_fields();
+  $fields = field_info_fields();  
   $servers = search_api_server_load_multiple(FALSE);
   foreach (search_api_index_load_multiple(FALSE) as $index) {
     if (!empty($index->server) && !empty($servers[$index->server])) {
       $server = $servers[$index->server];
       if ($server->class == 'geocluster_solr_service') {
         $item = &$data['search_api_index_' . $index->machine_name];
+        
         // Set GeoclusterSearchApiViewsQuery class for all indices that
         // use the GeoclusterSearchApiSolrService.
         $item['table']['base']['query class'] = 'geocluster_search_api_views_query';

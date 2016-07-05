@@ -34,7 +34,7 @@ class GeoclusterSearchApiSolrService extends SearchApiSolrService {
 
   protected function addGeoclusterParams(array &$call_args, SearchApiQueryInterface $query, SolrGeohashGeoclusterAlgorithm &$algorithm) {
     $this->algorithm = &$algorithm;
-
+//watchdog('testing',"<pre>".print_r($call_args,true)."</pre>");
     $this->group_field = $algorithm->getFieldHandler()->field . ':geocluster_index_' . $algorithm->getGeohashLength();
     $group_limit = 1;
 
@@ -86,15 +86,14 @@ class GeoclusterSearchApiSolrService extends SearchApiSolrService {
       timer_start('geocluster');
       dd(timer_read("geocluster") . "ms: started clustering");
     }
-
     // Post-process clustered results.
     if ($this->algorithm) {
       geophp_load();
       $total_items = 0;
       $results_by_geohash = array();
       $index = $query->getIndex();
-      $fields = $this->getFieldNames($index);
-      $grouped_field = $fields[$this->group_field];
+      $fields = $this->getFieldNames($index);      
+      $grouped_field = $fields[$this->group_field];     
       $groups = $response->grouped->{$grouped_field}->groups;
       if (module_exists('devel')) {
         dd(timer_read("geocluster") . "ms: items from database: " . count($groups));
@@ -112,15 +111,18 @@ class GeoclusterSearchApiSolrService extends SearchApiSolrService {
         // Clustered results.
         // @todo: create cluster entity instead of fake result
         $doc = $group->doclist->docs[0];
-        $id = $doc->{$fields['search_api_item_id']};
+        
+        $id = $doc->{$fields['search_api_id']};
         $result = &$results['results'][$id];
 
         // Set geocluster specific result data.
         $result['clustered'] = $group->doclist->numFound > 1;
         $result['geocluster_ids'] = $id;
         $result['geocluster_count'] = $group->doclist->numFound;
+        //$result['title'] = 'ddd';
         $total_items += $group->doclist->numFound;
         $geohash = $group->groupValue;
+        watchdog('view_debug', '<pre>'.print_r($doc, true).'</pre>');
         // TODO: improve accuracy?
         //$location = geoPHP::load($geohash, 'geohash');
         $location = new Point(

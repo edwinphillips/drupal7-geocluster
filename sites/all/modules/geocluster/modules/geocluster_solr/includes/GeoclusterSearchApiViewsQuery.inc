@@ -11,7 +11,6 @@ class GeoclusterSearchApiViewsQuery extends SearchApiViewsQuery {
 
   public function build(&$view) {
     parent::build($view);
-
     if ($geocluster = geocluster_get_algorithm($view)) {
       $this->query->setOption("geocluster", $geocluster);
     }

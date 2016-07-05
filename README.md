@@ -7,5 +7,5 @@ Administrator details once setup:
 Username: admin
 Password: password
 
-SOLR demo module not enabled ... can't get it working anyway ... boohoo
+SOLR demo module enabled ... woot!
 

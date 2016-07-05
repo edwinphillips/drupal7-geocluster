@@ -18,7 +18,9 @@ files[] = includes/GeoclusterSearchApiViewsQuery.inc
 
 
 
-; Information added by drush on 2014-01-17
-version = "7.x-1.0-beta2+6-dev"
+; Information added by drupal.org packaging script on 2013-05-14
+version = "7.x-1.0-beta2"
+core = "7.x"
 project = "geocluster"
-datestamp = "1389968725"
+datestamp = "1368523522"
+
